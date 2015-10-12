@@ -88,10 +88,14 @@ int main(int argc, char **argv)
     }
 
     int ret = rename(outf_name, hash_name);
-
     if (ret == -1) {
 	perror("Renaming temp file");
     }
-    close(outf);
+
+    ret = close(outf);
+    if (ret == -1) {
+	perror("Closing output file");
+    }
+
     return ret;
 }
